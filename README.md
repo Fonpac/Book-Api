@@ -13,12 +13,12 @@ linux - https://docs.docker.com/engine/install/ubuntu/
 npm i
 ```
 
+
+# Development server
 ```bash
 # run docker-compose
 docker-compose up -d
 ```
-
-# Development server
 ```bash
 # run
 npm run dev
