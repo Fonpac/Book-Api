@@ -1,4 +1,4 @@
-const PORT = 3000
+const PORT = 3001
 
 import app from './app'
 

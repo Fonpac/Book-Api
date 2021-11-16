@@ -4,16 +4,28 @@ services:
         image: mysql:5.7
         restart: always
         environment:
+            TZ: 'AMERICA/SAO_PAULO'
             MYSQL_DATABASE: 'db'
             MYSQL_USER: 'user'
             MYSQL_PASSWORD: 'password'
             MYSQL_ROOT_PASSWORD: 'password'
         ports:
-            - '5000:3306'
+            - '3306:3306'
         expose:
-            - '5000'
+            - '3306'
         volumes:
             - './src/database/structure.sql:/docker-entrypoint-initdb.d/1.sql'
-# Names our volume
-volumes:
-    my-db:
+        networks:
+            - back
+    api:
+        build: .
+        restart: unless-stopped
+        links:
+            - "db"
+        ports:
+            - "3000:3000"
+        networks:
+            - back
+networks:
+    back:
+        driver: bridge
