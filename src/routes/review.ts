@@ -1,13 +1,13 @@
 import { Request, Response, Router } from 'express'
-import { authenticationMiddleware } from 'middlewares/authenticated'
-import { validationMiddleware } from 'middlewares/validation'
-import { CreateReviewData, CreateReviewSchema, UpdateReviewData, UpdateReviewSchema } from 'validators/review'
-import ReviewModel from 'models/review'
+import { authenticationMiddleware } from '../middlewares/authenticated'
+import { validationMiddleware } from '../middlewares/validation'
+import { CreateReviewData, CreateReviewSchema, UpdateReviewData, UpdateReviewSchema } from '../validators/review'
+import ReviewModel from '../models/review'
 
 const router = Router()
 
 router.post(
-    '/create',
+    '/',
     authenticationMiddleware,
     validationMiddleware(CreateReviewSchema),
     async (req: Request, res: Response) => {
@@ -22,7 +22,7 @@ router.post(
 )
 
 router.patch(
-    '/update/:id',
+    '/:id',
     authenticationMiddleware,
     validationMiddleware(UpdateReviewSchema),
     async (req: Request, res: Response) => {
@@ -47,7 +47,7 @@ router.patch(
     }
 )
 
-router.post('/update/:id', authenticationMiddleware, async (req: Request, res: Response) => {
+router.post('/:id', authenticationMiddleware, async (req: Request, res: Response) => {
     const id = Number(req.params.id)
 
     const review = await ReviewModel.byId(id)

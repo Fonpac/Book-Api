@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express'
-import { authenticationMiddleware } from 'middlewares/authenticated'
+import { authenticationMiddleware } from '../middlewares/authenticated'
 import BookModel from '../models/book'
 
 const router = Router()
