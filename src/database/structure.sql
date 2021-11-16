@@ -18,13 +18,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `id17871797_library`
+-- Banco de dados: `library`
 --
-CREATE DATABASE IF NOT EXISTS `id17871797_library` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-
+CREATE DATABASE IF NOT EXISTS `library` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `library`;
 GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' IDENTIFIED BY 'password';
 
-USE `id17871797_library`;
 
 -- --------------------------------------------------------
 
