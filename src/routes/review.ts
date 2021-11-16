@@ -30,11 +30,11 @@ router.patch(
         const id = Number(req.params.id)
 
         const review = await ReviewModel.byId(id)
-        if (!review) {
-            return res.status(400).json({
+        if (!review || review.created_by != res.locals.payload.id) {
+            return res.status(401).json({
                 error: {
-                    code: 'VALIDATION_ERROR',
-                    message: 'EMAIL_ALREADY_REGISTERED'
+                    code: 'UNAUTHENTICATED',
+                    message: 'NOT_ENOUGH_PERMISSION'
                 }
             })
         }
@@ -47,15 +47,15 @@ router.patch(
     }
 )
 
-router.post('/:id', authenticationMiddleware, async (req: Request, res: Response) => {
+router.delete('/:id', authenticationMiddleware, async (req: Request, res: Response) => {
     const id = Number(req.params.id)
 
     const review = await ReviewModel.byId(id)
     if (!review || review.created_by != res.locals.payload.id) {
-        return res.status(400).json({
+        return res.status(401).json({
             error: {
-                code: 'VALIDATION_ERROR',
-                message: 'EMAIL_ALREADY_REGISTERED'
+                code: 'UNAUTHENTICATED',
+                message: 'NOT_ENOUGH_PERMISSION'
             }
         })
     }

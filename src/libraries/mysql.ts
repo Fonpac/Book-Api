@@ -3,10 +3,10 @@ import knex, { Knex } from 'knex'
 const mysql: Knex = knex({
     client: 'mysql',
     connection: {
-        host: 'localhost',
-        user: 'user',
-        password: 'password',
-        database: 'id17871797_library'
+        host: process.env.MYSQL_HOST,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWD,
+        database: process.env.MYSQL_DB
     }
 } as Knex.Config)
 

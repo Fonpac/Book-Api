@@ -21,10 +21,10 @@ SET time_zone = "+00:00";
 -- Banco de dados: `id17871797_library`
 --
 CREATE DATABASE IF NOT EXISTS `id17871797_library` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' IDENTIFIED BY 'password';
+
 USE `id17871797_library`;
-
-GRANT ALL PRIVILEGES ON id17871797_library.* TO 'user'@'%' IDENTIFIED BY 'password';
-
 
 -- --------------------------------------------------------
 
