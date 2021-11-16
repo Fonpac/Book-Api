@@ -20,6 +20,10 @@ npm i
 docker-compose up -d
 ```
 ```bash
+# install ts-node
+npm install -g ts-node
+```
+```bash
 # run
 npm run dev
 ```
