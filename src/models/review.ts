@@ -1,6 +1,9 @@
 import mysql from '../libraries/mysql'
 
 export default {
+    getAll() {
+        return mysql('review')
+    },
     byId(id: number) {
         return mysql('review').where({ id }).first()
     },

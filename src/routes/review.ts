@@ -6,6 +6,12 @@ import ReviewModel from '../models/review'
 
 const router = Router()
 
+router.get('/', authenticationMiddleware, async (req: Request, res: Response) => {
+    const reviews = await ReviewModel.getAll()
+
+    res.json(reviews)
+})
+
 router.post(
     '/',
     authenticationMiddleware,
