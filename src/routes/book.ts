@@ -8,7 +8,7 @@ router.get('/:id', authenticationMiddleware, async (req: Request, res: Response)
     const id = req.params.id
     const user_id = res.locals.payload.id
     const reviews = await BookModel.reviews(id)
-    const comments = await BookModel.comments(id)
+    const comments = await BookModel.comments(reviews.map(review => review.id))
     const upvotes = await BookModel.upvotes(
         reviews.map((r) => r.id),
         comments.map((c) => c.id)
@@ -19,14 +19,14 @@ router.get('/:id', authenticationMiddleware, async (req: Request, res: Response)
             return {
                 ...review,
                 upvotes: upvotes.find((up) => up.review_id == review.id),
-                liked_by_current_user: upvotes.find((up) => up.user_id == user_id && up.review_id != null)
-            }
-        }),
-        comments: comments.map((comment) => {
-            return {
-                ...comment,
-                upvotes: upvotes.find((up) => up.comment_id == comment.id),
-                liked_by_current_user: upvotes.find((up) => up.user_id == user_id && up.comment != null)
+                liked_by_current_user: upvotes.find((up) => up.user_id == user_id && up.review_id != null),
+                comments: comments.filter(comment => comment.review_id == review.id).map(comment => {
+                    return {
+                        ...comment,
+                        upvotes: upvotes.find((up) => up.comment_id == comment.id),
+                        liked_by_current_user: upvotes.find((up) => up.user_id == user_id && up.comment != null)
+                    }
+                })
             }
         })
     })

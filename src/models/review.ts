@@ -15,5 +15,8 @@ export default {
     },
     delete(id: number) {
         return mysql('review').where({ id }).del()
+    },
+    comments(id: number) {
+        return mysql('comment').where('review_id', id)
     }
 }

@@ -23,6 +23,8 @@ router.post(
 
         const newReview = await ReviewModel.byId(id)
 
+        newReview.comments = await ReviewModel.comments(id);
+
         return res.json(newReview)
     }
 )

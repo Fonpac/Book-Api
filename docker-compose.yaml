@@ -24,6 +24,21 @@ services:
             - "3000:3000"
         networks:
             - back
+    pma:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - "8081:80"
+        restart: unless-stopped
+        links:
+            - "db"
+        environment:
+            - TZ=America/Sao_Paulo
+            - PMA_HOST=db
+            - PMA_PORT=3306
+            - UPLOAD_LIMIT=100M
+        networks:
+            - back
+
 networks:
     back:
         driver: bridge

@@ -37,7 +37,7 @@ CREATE TABLE `comment` (
   `created_by` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `book_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `review_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -95,7 +95,8 @@ CREATE TABLE `user` (
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `comment_ibfk_1` (`created_by`);
+  ADD KEY `comment_ibfk_1` (`created_by`),
+  ADD KEY `comment_ibfk_2` (`review_id`);
 
 --
 -- Índices para tabela `review`
@@ -149,7 +150,8 @@ ALTER TABLE `user`
 -- Limitadores para a tabela `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `upvote_ibfk_2` FOREIGN KEY (`review_id`) REFERENCES `review` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `review`

@@ -2,12 +2,12 @@ import Joi from 'joi'
 
 export interface CreateCommentData {
     text: string
-    book_id: string
+    review_id: number
 }
 
 export const CreateCommentSchema = Joi.object({
     text: Joi.string().required(),
-    book_id: Joi.string().required()
+    review_id: Joi.number().required()
 })
 
 export interface UpdateCommentData {
