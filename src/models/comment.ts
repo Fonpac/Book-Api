@@ -1,6 +1,9 @@
 import mysql from '../libraries/mysql'
 
 export default {
+    getAll() {
+        return mysql('comment')
+    },
     byId(id: number) {
         return mysql('comment').where({ id }).first()
     },

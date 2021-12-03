@@ -6,6 +6,12 @@ import CommentModel from '../models/comment'
 
 const router = Router()
 
+router.get('/', authenticationMiddleware, async (req: Request, res: Response) => {
+    const comments = await CommentModel.getAll()
+
+    res.json(comments)
+})
+
 router.post(
     '/',
     authenticationMiddleware,
