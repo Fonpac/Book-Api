@@ -3,13 +3,15 @@ import { validationMiddleware } from '../middlewares/validation'
 import { authenticationMiddleware } from '../middlewares/authenticated'
 import { CreateCommentData, CreateCommentSchema, UpdateCommentData, UpdateCommentSchema } from '../validators/comment'
 import CommentModel from '../models/comment'
-
+import UserModel from '../models/user';
 const router = Router()
 
 router.get('/', authenticationMiddleware, async (req: Request, res: Response) => {
-    const comments = await CommentModel.getAll()
-
-    res.json(comments)
+    const comments = await CommentModel.getAll();
+    comments.map(async (comment) => {
+        comment.user = await UserModel.byId(comment.created_by);
+    })
+    res.json(comments);
 })
 
 router.post(
