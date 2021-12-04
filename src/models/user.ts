@@ -1,6 +1,9 @@
 import mysql from '../libraries/mysql'
 
 export default {
+    getAll() {
+        return mysql('user')
+    },
     new(data: any) {
         return mysql('user').insert(data)
     },

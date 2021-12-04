@@ -8,9 +8,14 @@ const router = Router()
 
 router.get('/', authenticationMiddleware, async (req: Request, res: Response) => {
     const comments = await CommentModel.getAll();
-    comments.map(async (comment) => {
-        comment.user = await UserModel.byId(comment.created_by);
+
+    const users = await UserModel.getAll();
+
+    //nao conseugi fazer join nisso aqui
+    comments.forEach((comment) => {
+        comment.user = users.find((user) => user.id === comment.created_by);
     })
+
     res.json(comments);
 })
 
